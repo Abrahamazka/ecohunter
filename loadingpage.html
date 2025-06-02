@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ecommers</title>
+<style>
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background-color: #00aa13; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    user-select: none;
+  }
+
+  .app-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+ 
+  .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.4);
+    width: 150px;
+    height: 150px;
+    background-color: #00aa13;
+    border-radius: 50%;
+    box-shadow:
+      0 0 20px rgba(0,170,19,0.7),
+      inset 0 0 15px rgba(0, 170, 19, 0.9);
+    animation: circleExpand 1.2s ease forwards;
+    animation-delay: 0.2s;
+  }
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%) scale(0);
+    animation: logoScaleIn 1s ease forwards;
+    animation-delay: 1.4s;
+  }
+
+  .logo-circle {
+    width: 90px;
+    height: 90px;
+    border: 12px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255 255 255 / 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .logo-cut {
+    width: 55px;
+    height: 55px;
+    background: #00aa13;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: absolute;
+    top: 28%;
+    left: 62%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow:
+      inset 5px 0 6px #007a0f,
+      inset -3px 0 4px #00cc28;
+  }
+  .app-name {
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpIn 1s ease forwards;
+    animation-delay: 2.6s;
+  }
+  @keyframes circleExpand {
+    to {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow:
+        0 0 40px rgba(0,170,19,0.9),
+        inset 0 0 30px rgba(0, 170, 19, 1);
+    }
+  }
+  @keyframes logoScaleIn {
+    to {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  @keyframes fadeUpIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="app-container" aria-label="App opening animation">
+    <div class="circle"></div>
+    <div class="logo" role="img" aria-label="Gojek logo">
+      <div class="logo-circle"></div>
+      <div class="logo-cut"></div>
+    </div>
+    <div class="app-name">GOJEK</div>
+  </div>
+
+<script>
+  const appContainer = document.querySelector('.app-container');
+  setTimeout(() => {
+    appContainer.style.transition = 'opacity 0.8s ease';
+    appContainer.style.opacity = '0';
+  }, 4000);
+</script>
+</body>
+</html>
+
