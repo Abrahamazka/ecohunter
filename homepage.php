@@ -247,7 +247,7 @@ body {
 <hr>
 <section id="copyright">
     <div class="kopikanan">
-     <p>© 2009 - 2025, PT. Tokopedia. All Rights Reserved.</p>
+     <p>© 2025, Kelompok. All Rights Reserved.</p>
     </div>
 </section>
 </body>
