@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmeasMart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmeasMart</title>
 </head>
 <style>
-    * {
+        * {
         margin: 0%;
         background-color: white;
         scroll-behavior: smooth;
@@ -66,90 +66,89 @@
         gap: 20px;
         padding-right: 10px;
     }
-.container {
-  max-width: 1090px;
-  margin: auto;
-  padding: 35px;
-}
 
-.product-page {
+
+.container {
   display: flex;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 20px;
 }
 
 .left {
-  flex: 1;
-  padding-right: 30px;
-}
-
-.image {
-  width: 50%;
-  border-radius: 8px;
-}
-
-.subtitle {
-    color: #666;
-  margin-bottom: 10px;
-}
-.price {
-    color: #27ae60;
-  font-size: 28px;
-  margin: 10px 0;
-}
-.stock {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.stock input {
-  width: 60px;
-  padding: 5px;
+  flex: 3;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .right {
- flex: 2;
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-
-.tombol {
+.item-wo {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.keranjang, .beli {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.keranjang {
-  background-color: #f0c14b;
-}
-
-.beli {
-  background-color: #28a745;
-  color: white;
-}
-.detail h3 {
+  align-items: center;
   margin-top: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.item-wo img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 0 15px;
+}
+
+.item {
+  flex: 1;
+}
+
+.item h4 {
+  margin: 0;
+}
+
+.item .desk {
+  color: gray;
+  font-size: 14px;
+}
+
+.item .price {
+  font-weight: bold;
+  color: green;
   font-size: 18px;
 }
 
-.detail ul {
-  padding-left: 20px;
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
+.item-actions input[type="number"] {
+  width: 40px;
+  text-align: center;
+}
+
+.buy-btn {
+  background-color: #00aa5b;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 </style>
 <body>
-<header>
+ <header>
         <div class="kepala">
             <div class="smeas">
             <a href="#promo">
@@ -167,41 +166,35 @@
         <div>
         <hr>
         </div>
-    </header>
-
-   <div class="container">
-    <div class="product-page">
-      <div class="left">
-        <img src="etal1.png" class="image">
-      </div>
-    <div>
+ </header>
    
-    <div class="right">
-      <h1>Ready stock adis</h1>
-      <p class="subtitle">Free Install | Garansi 1 Tahun </p>
-      <h2 class="price">Rp9.155.000</h2>
-    
-    <div class="stock">
-          <label for="jumlah">Jumlah:</label>
-          <input type="number" id="jumlah" value="1" min="1" max="200">
-          <span>Stok: 200</span>
+<div class="container">
+    <div class="left">
+      <h2>Keranjang</h2>
+      <div class="item-wo">
+        <input type="checkbox">
+        <img src="etal1.png">
+        <div class="item">
+          <h4>Adis</h4>
+          <p class="desk">Free Install | Garansi 1 Tahun</p>
+          <p class="price">Rp9.155.000</p>
         </div>
-    
-    <div class="tombol">
-          <button class="keranjang">+ Keranjang</button>
-          <button class="beli">Beli</button>
-        </div>   
+        <div class="item-actions">
+          <input type="number" value="1" min="1">        
+        </div>
+      </div>
     </div>
-    
-     <div class="detail">
-          <h3>Detail Produk</h3>
-          <ul>
-            <li>Adis</li>
-            <li>DDR5</li>
-            <li>Sigam</li>
-          </ul>
-        </div>
 
+    <div class="right">
+      <h3>Ringkasan belanja</h3>
+      <p>Total: <strong>Rp-</strong></p>
+      <button class="buy-btn">Beli</button>
     </div>
+  </div>
+
+
+
+
+
 </body>
 </html>
