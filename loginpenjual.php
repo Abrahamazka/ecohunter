@@ -18,9 +18,9 @@ if (!empty($_POST)) {
         $error = "Email atau password tidak ada";
     } else {
         $hasil = true;
-        $_SESSION['user']= array(
-            'id' => $user['id'],
-            'nama' => $user['nama'],
+        $_SESSION['seller']= array(
+            'id' => $seller['id'],
+            'toko' => $seller['toko'],
 
         );
         header("Location: homepage.php");

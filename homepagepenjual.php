@@ -63,8 +63,7 @@
   /* MAIN LAYOUT */
   .layout {
     display: flex;
-    flex: 1;
-    height: calc(100vh - 64px);
+    min-height: 10vh;
     overflow: hidden;
   }
 
@@ -74,7 +73,7 @@
     overflow-y: auto;
     padding: 32px 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
     gap: 32px;
     background: #f0f4f8;
   }
@@ -85,7 +84,6 @@
     box-shadow: 0 8px 20px rgb(0 0 0 / 0.06);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .product-card:hover, .product-card:focus-within {
@@ -94,6 +92,7 @@
   }
   .product-image {
     position: relative;
+    border-radius: 20px;
     width: 100%;
     padding-top: 75%; /* 4:3 ratio */
     overflow: hidden;
@@ -256,60 +255,24 @@
 <div class="layout">
   <main class="product-grid" tabindex="0">
     <!-- Product cards -->
+     <?php 
+     $pdo = require 'koneksi.php';
+     $sql = 'SELECT id, nama_produk, gambar_produk, harga, stok, deskripsi FROM products';
+     $query = $pdo->prepare($sql);
+     $query->execute();
+
+     while($data = $query->fetch()) {
+      $base64 = base64_encode($data['gambar_produk']); ?>
     <article class="product-card" tabindex="0">
       <div class="product-image">
-        <img src="etal1.png" alt="maniak robalok" />
+        <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
       </div>
       <div class="product-details">
-        <h3 class="product-title">Adis</h3>
-        <p class="product-price">500.000</p>
+        <h3 class="product-title"><?php echo $data['nama_produk'] ?></h3>
+        <p class="product-price">RP. <?php echo number_format($data['harga'], 2, ",", ".") ?></p>
       </div>
     </article>
-    <article class="product-card" tabindex="0">
-      <div class="product-image">
-        <img src="etal2.png" alt="aduh epan" />
-      </div>
-      <div class="product-details">
-        <h3 class="product-title">epan</h3>
-        <p class="product-price">1.290.000</p>
-      </div>
-    </article>
-    <article class="product-card" tabindex="0">
-      <div class="product-image">
-        <img src="etal3.jpg" alt="sigma" />
-      </div>
-      <div class="product-details">
-        <h3 class="product-title">fadil</h3>
-        <p class="product-price">699.000</p>
-      </div>
-    </article>
-    <article class="product-card" tabindex="0">
-      <div class="product-image">
-        <img src="etal4.png" alt="gemoy" />
-      </div>
-      <div class="product-details">
-        <h3 class="product-title">rafif</h3>
-        <p class="product-price">1.000.000</p>
-      </div>
-    </article>
-    <article class="product-card" tabindex="0">
-      <div class="product-image">
-        <img src="" alt="ya yaa" />
-      </div>
-      <div class="product-details">
-        <h3 class="product-title">dupan</h3>
-        <p class="product-price">600.000</p>
-      </div>
-    </article>
-    <article class="product-card" tabindex="0">
-      <div class="product-image">
-        <img src="" alt="ya yaa" />
-      </div>
-      <div class="product-details">
-        <h3 class="product-title">azka</h3>
-        <p class="product-price">10.000.000</p>
-      </div>
-    </article>
+    <?php } ?>
   </main>
 
   <aside id="rightSidebar" class="right-sidebar" role="complementary" aria-label="Sidebar navigation menu">
