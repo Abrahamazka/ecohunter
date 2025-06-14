@@ -122,17 +122,25 @@ session_start();
       cursor: pointer;
     }
 
-    .search {
-      height: 40px;
-      width: 1000px;
-      border-radius: 50px;
-      border: 1px solid;
-    }
+.search {
+  height: 38px;
+  width: 1000px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  padding: 50px 10px;
+  overflow: hidden;
+}
 
-    .search input {
-      background: none;
-      border: none;
-    }
+.search input {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  flex: 1;
+}
 
     .gambar {
       display: flex;

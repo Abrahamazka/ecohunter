@@ -146,6 +146,30 @@
   border-radius: 6px;
   cursor: pointer;
 }
+.all {
+  margin-top: 25px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+.all input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00aa5b;
+  cursor: pointer;
+}
+.all label:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 </style>
 <body>
  <header>
@@ -171,8 +195,15 @@
 <div class="container">
     <div class="left">
       <h2>Keranjang</h2>
+      
+      <div class="all">
+        <input type="checkbox" id="select-all" style="margin-right=10px;">
+        <label for="select-all">Pilih semua</label>
+      </div>
+
+
       <div class="item-wo">
-        <input type="checkbox">
+        <input type="checkbox" class="csscek">
         <img src="etal1.png">
         <div class="item">
           <h4>Adis</h4>
@@ -183,7 +214,22 @@
           <input type="number" value="1" min="1">        
         </div>
       </div>
+      <div class="item-wo">
+        <input type="checkbox" class="csscek">
+        <img src="etal1.png">
+        <div class="item">
+          <h4>Adis</h4>
+          <p class="desk">Free Install | Garansi 1 Tahun</p>
+          <p class="price">Rp9.155.000</p>
+        </div>
+        <div class="item-actions">
+          <input type="number" value="1" min="1">        
+        </div>
+      </div>   
+
+
     </div>
+     
 
     <div class="right">
       <h3>Ringkasan belanja</h3>
@@ -194,7 +240,20 @@
 
 
 
-
-
 </body>
+<script>
+  const selectAll = document.getElementById('select-all');
+  const itemCheckboxes = document.querySelectorAll('.csscek');
+
+  selectAll.addEventListener('change', function () {
+    itemCheckboxes.forEach(cb => cb.checked = selectAll.checked);
+  });
+  
+  itemCheckboxes.forEach(cb => {
+    cb.addEventListener('change', function () {
+      const allChecked = [...itemCheckboxes].every(cb => cb.checked);
+      selectAll.checked = allChecked;
+    });
+  });
+</script>
 </html>
