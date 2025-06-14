@@ -99,7 +99,7 @@ session_start();
 /*PEMBATAS OI*/
 
     body {
-      background-color: rgba(237, 237, 224, 0.255);
+      background-color: rgb(255, 255, 255);
     }
 
     header {
@@ -121,16 +121,20 @@ session_start();
       margin-left: 20px;
       cursor: pointer;
     }
+    .smeas a {
+      text-decoration: none;
+    }
 
 .search {
-  height: 38px;
-  width: 1000px;
+   height: 40px;
+   width: 1000px;
   border-radius: 50px;
   border: 1px solid #ccc;
   background-color: #f2f2f2;
   display: flex;
   align-items: center;
-  padding: 50px 10px;
+  justify-content:center;
+  padding: 0px 20px;
   overflow: hidden;
 }
 
@@ -274,7 +278,7 @@ session_start();
           </a>
         </div>
         <div class="search">
-          <input type="text" placeholder="Cari di SmeasMart..." style="font-size: 17px ; margin-left: 20px; margin-top: 9px;">
+          <input type="text" placeholder="Cari di SmeasMart...">
         </div>
         <div class="gambar">
           <img src="keranjang.png" alt="keranjang" width="40px">
