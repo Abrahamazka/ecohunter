@@ -204,24 +204,5 @@
     <button class="save-button" onclick="simpan()">Simpan</button>
     <button class="cancel-button" onclick="toggleEdit(false)">Batal</button>
   </div>
-
-  <script>
-    function toggleEdit(show) {
-      document.getElementById("ViewProfile").style.display = show ? "none" : "block";
-      document.getElementById("editProfile").style.display = show ? "block" : "none";
-    }
-
-    function simpan() {
-      const nama = document.getElementById("namaInput").value;
-      const email = document.getElementById("emailInput").value;
-      const alamat = document.getElementById("alamatInput").value;
-
-      document.getElementById("namadisplay").innerText = nama;
-      document.getElementById("emaildisplay").innerText = email;
-      document.getElementById("alamatdisplay").innerText = alamat;
-
-      toggleEdit(false);
-    }
-  </script>
 </body>
 </html>
