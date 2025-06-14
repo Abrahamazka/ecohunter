@@ -21,6 +21,8 @@ if (!empty($_POST)) {
         $_SESSION['user']= array(
             'id' => $user['id'],
             'nama' => $user['nama'],
+            'alamat' => $user['alamat'],
+            'profil' => $user['profil']
 
         );
         header("Location: homepage.php");

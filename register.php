@@ -17,12 +17,14 @@ if (!empty($_POST)) {
         if ($count > 0) {
             $error = 'Email sudah terdaftar';
         } else {
-            $sql = 'insert into users (nama, email, password) values (:nama, :email, :password)';
+            $sql = 'insert into users (nama, email, alamat, profil, password) values (:nama, :email, :alamat, :profil, :password)';
             $query2 = $pdo->prepare($sql);
             $query2->execute(array(
                 'nama' => $_POST['nama'],
                 'email' => $_POST['email'],
-                'password' => sha1($_POST['password'])
+                'alamat' => $_POST['alamat'],
+                'password' => sha1($_POST['password']),
+                'profil' => file_get_contents('profil.webp')
             ));
             $hasil = true;
             
@@ -152,7 +154,7 @@ if (!empty($_POST)) {
 
 <body>
     <div class="kepala">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <h2>Daftar</h2>
             <?php
             if($hasil == true) { ?>
@@ -170,6 +172,10 @@ if (!empty($_POST)) {
             <div class="kolom">
                 <input type="email" name="email" required />
                 <span>email</span>
+            </div>
+            <div class="kolom">
+                <input type="text" name="alamat" required />
+                <span>alamat</span>
             </div>
             <div class="kolom">
                 <input type="password" name="password" required />

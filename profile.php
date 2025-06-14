@@ -1,5 +1,36 @@
+<?php
+session_start();
+if (empty($_SESSION['user'])) {
+  header("location: login.php");
+}
+$pdo = require 'koneksi.php';
+if(isset($_POST['submit'])){
+  if(!empty($_FILES['profil']['tmp_name'])){
+    $sql = 'UPDATE users SET nama=:nama, email=:email, alamat=:alamat, profil=:profil WHERE id=:id';
+    $query = $pdo->prepare($sql);
+    $query->execute(array(
+      'nama' => $_POST['nama'],
+      'email' => $_POST['email'],
+      'alamat' => $_POST['alamat'],
+      'profil' => file_get_contents($_FILES['profil']['tmp_name']),
+      'id' => $_SESSION['user']['id']
+    ));
+  } else {
+    $sql = 'UPDATE users SET nama=:nama, email=:email, alamat=:alamat WHERE id=:id';
+    $query = $pdo->prepare($sql);
+    $query->execute(array(
+      'nama' => $_POST['nama'],
+      'email' => $_POST['email'],
+      'alamat' => $_POST['alamat'],
+      'id' => $_SESSION['user']['id']
+    ));
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <title>Profil Saya</title>
@@ -101,7 +132,9 @@
       margin-bottom: 15px;
     }
 
-    .edit-button, .save-button, .cancel-button {
+    .edit-button,
+    .save-button,
+    .cancel-button {
       width: 100%;
       padding: 10px;
       border: none;
@@ -139,16 +172,16 @@
       padding: 30px;
       background-color: white;
       border-radius: 10px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .edit-form label {
+    label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
     }
 
-    .edit-form input {
+    input {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
@@ -157,6 +190,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="kepala">
@@ -175,34 +209,29 @@
     </div>
     <hr>
   </header>
-
+<?php $pdo = require 'koneksi.php';
+$sql = 'SELECT * FROM users';
+$query = $pdo->prepare($sql);
+$query->execute();
+$data = $query->fetch();
+$base64 = base64_encode($data['profil']); ?>
   <div class="container">
-    <img src="INIFURINA.jpg" class="profile-pic">
-    <h2 id="namadisplay">Abraham</h2>
-
-    <div class="info" id="ViewProfile">
-      <label>Email</label>
-      <p id="emaildisplay">gw@example.com</p>
-
-      <label>Alamat</label>
-      <p id="alamatdisplay">Gunung Sari Indah Blok FF 49, Karangpilang, Surabaya</p>
-
-      <button class="edit-button" onclick="toggleEdit(true)">Edit Profil</button>
-    </div>
+    <?php echo "<img src= 'data:image/*;base64, $base64' class='profile-pic' alt=''>" ?>
+    <form action="" method="post" enctype="multipart/form-data">
+      <div class="info" id="ViewProfile">
+        <label for="">Username</label>
+        <input type="text" name="nama" value="<?php echo $data['nama'] ?>">
+        <label>Email</label>
+        <input type="email" name="email" value="<?php echo $data['email'] ?>">
+        <label>Alamat</label>
+        <input type="text" name="alamat" value="<?php echo $data['alamat'] ?>">
+        <label>Foto profil</label>
+        <input type="file" accept="image/*" name="profil">
+        <button class="edit-button" name="submit" type="submit">Edit Profil</button>
+      </div>
+    </form>
   </div>
-
-  <div class="edit-form" id="editProfile">
-    <label for="namaInput">Nama</label>
-    <input type="text" id="namaInput" value="Abraham">
-
-    <label for="emailInput">Email</label>
-    <input type="email" id="emailInput" value="gw@example.com">
-
-    <label for="alamatInput">Alamat</label>
-    <input type="text" id="alamatInput" value="Gunung Sari Indah Blok FF 49, Karangpilang, Surabaya">
-
-    <button class="save-button" onclick="simpan()">Simpan</button>
-    <button class="cancel-button" onclick="toggleEdit(false)">Batal</button>
   </div>
 </body>
+
 </html>
