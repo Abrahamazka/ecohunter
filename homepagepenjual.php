@@ -32,10 +32,29 @@
     align-items: center;
     padding: 16px 32px;
   }
+
+  header img {
+    width: 60px;
+
+  }
   header h1 {
     font-size: 1.6rem;
     font-weight: 700;
+    position: absolute; 
+    left: 7%;
+    color: #C9FDD7;
+    text-shadow: 6px 5px 10px black;
+    
   } 
+  header h2 {
+     font-size: 1.6rem;
+    font-weight: 700;
+    position: absolute; 
+    left: 13.5%;
+    color: cyan;
+    text-shadow: 6px 5px 10px black;
+
+  }
     .search-bar input {
       width: 300px;
       padding: 8px 15px;
@@ -246,7 +265,9 @@
 <body>
 
 <header>
-      <h1>Smeasmart</h1>
+      <img src="keranj.jpg">
+      <h1><b>Smea$</b></h1>
+      <h2><b>mart</b></h2>
     <div class="search-bar">
       <input type="text" placeholder="Cari produk...">
   <button id="sidebarToggle" aria-expanded="false" aria-controls="rightSidebar" aria-label="Toggle sidebar menu">Menu</button>
