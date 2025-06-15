@@ -1,7 +1,8 @@
 <?php
 session_start();
-
-?>
+if (!isset($_SESSION['keranjang'])) {
+  $_SESSION['keranjang'] = [];
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,6 +149,7 @@ session_start();
       justify-content: center;
       padding: 0px 20px;
       overflow: hidden;
+
     }
 
     .search input {
@@ -157,7 +159,15 @@ session_start();
       font-size: 20px;
       flex: 1;
     }
-
+    .form{
+      display: flex;
+    }
+    .cari{
+      font-size: 30px;
+      border: none;
+      background-color: white;
+      
+    }
     .gambar {
       display: flex;
       align-items: center;
@@ -196,15 +206,17 @@ session_start();
       overflow-x: scroll;
       margin-left: 30px;
       row-gap: 21px;
+      scrollbar-width: none;
     }
+
     .etlse2 {
       margin-left: 30px;
       display: flex;
       flex-wrap: wrap;
-      row-gap: 21px;
+      row-gap: 30px;
     }
-    
-    
+
+
     .produk {
       min-width: 220px;
       background: #fff;
@@ -313,11 +325,15 @@ session_start();
             <span style="color: green;">Smea$</span><span style="color:darkblue">mart</span>
           </a>
         </div>
-        <div class="search">
-          <input type="text" placeholder="Cari di SmeasMart...">
-        </div>
+        <!-- cari berdasarkan nama prdukkkkk -->
+        <form class="form" action="search.php" method="post">
+          <div class="search">
+            <input type="text" name="cari" placeholder="Cari di SmeasMart...">
+          </div>
+          <button type="submit" class="cari" name="go">&#128269;</button>
+        </form>
         <div class="gambar">
-          <img src="keranjang.png" alt="keranjang" width="40px">
+          <a href="keranjang.php"><img src="keranjang.png" alt="keranjang" width="40px"></a>
           <?php
           if (isset($_SESSION['user'])) {
             $pdo = require 'koneksi.php';
@@ -326,7 +342,7 @@ session_start();
             $query->execute(['id' => $_SESSION['user']['id']]);
             $data = $query->fetch();
             $base64 = base64_encode($data['profil']);
-            echo "<img src= 'data:image/*;base64, $base64' alt='profil' width='40px' style='border-radius: 50%;''>";
+            echo "<a href='profile.php'><img src= 'data:image/*;base64, $base64' alt='profil' width='40px' style='border-radius: 50%;''></a>";
           } else { ?>
             <a href="register.php" class="tomboool">Register</a>
             <a href="login.php" class="tomboool">Login</a>
@@ -352,12 +368,14 @@ session_start();
       <div id="Kategori1" class="etlse">
         <?php while ($dataLaris = $queryLaris->fetch()) {
           $base64 = base64_encode($dataLaris['gambar_produk']); ?>
+
           <div class="produk">
-            <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+            <a href="etal.php?id=<?php echo $dataLaris['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
             <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
             <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
             <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
           </div>
+
 
 
         <?php } ?>
@@ -375,12 +393,14 @@ session_start();
         <?php while ($dataBaru = $queryBaru->fetch()) {
           $base64 = base64_encode($dataBaru['gambar_produk']);
         ?>
+
           <div class="produk">
-            <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+            <a href="etal.php?id=<?php echo $dataBaru['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
             <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
             <div class="price">RP.<?php echo number_format($dataBaru['harga'], 2, ",", ".") ?></div>
             <div><span><?php echo $dataBaru['terjual'] ?> Terjual</span></div>
           </div>
+
         <?php } ?>
       </div>
     </section>

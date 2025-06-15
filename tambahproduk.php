@@ -84,7 +84,7 @@ if(!empty($_POST)) {
             <label for="gambar">Gambar Produk</label>
             <input type="file" accept="image/*" name="gambarproduk">
             <label for="harga">Harga Satuan</label>
-            <input type="number" name="hargaproduk">
+            <input type="number" step="any" name="hargaproduk">
             <label for="stok">Stok Produk</label>
             <input type="number" name="stok" id="">
             <label for="deskripsi">Deskripsi</label>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['seller'])) {
+  header('location: loginpenjual.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,16 +182,16 @@
 
   /* Sidebar menu items */
   .sidebar-menu {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
     flex-grow: 1;
-    overflow-y: auto;
     padding-right: 8px;
   }
 
   .sidebar-item {
     background: rgba(71,85,105,0.3);
+    min-width: max-content;
     padding: 16px 20px;
     border-radius: 16px;
     color: #cbd5e1;
@@ -196,6 +202,10 @@
     cursor: pointer;
     user-select: none;
     transition: background-color 0.3s ease, color 0.25s ease;
+  }
+  a{
+    text-decoration: none;
+    color: #cbd5e1;
   }
   .sidebar-item:hover, .sidebar-item:focus {
     background: #3b82f6;
@@ -300,28 +310,14 @@
     <h2>Menu</h2>
     <nav class="sidebar-menu" aria-label="Sidebar navigation links">
       <button class="sidebar-item" tabindex="0" type="button">
-        <span class="sidebar-icon" aria-hidden="true">🏠</span>
-        <span>Halaman</span>
-      </button>
-      <button class="sidebar-item" tabindex="0" type="button">
-        <span class="sidebar-icon" aria-hidden="true">🛒</span>
-        <span>Orderan</span>
-      </button>
-      <button class="sidebar-item" tabindex="0" type="button">
-        <span class="sidebar-icon" aria-hidden="true">💬</span>
-        <span>Pesan</span>
-      </button>
-      <button class="sidebar-item" tabindex="0" type="button">
-        <span class="sidebar-icon" aria-hidden="true">⚙️</span>
-        <span>Pengaturan</span>
+        
+        <span class="sidebar-icon" aria-hidden="true">📦</span>
+        <span><a href="tambahproduk.php">Tambahkan Produk</a></span>
+        
       </button>
       <button class="sidebar-item" tabindex="0" type="button">
         <span class="sidebar-icon" aria-hidden="true">📦</span>
-        <span>Tambahkan Produk</span>
-      </button>
-      <button class="sidebar-item" tabindex="0" type="button">
-        <span class="sidebar-icon" aria-hidden="true">❓</span>
-        <span>Bantuan</span>
+        <span><a href="logoutseller.php">Log Out</a></span>
       </button>
     </nav>
   </aside>

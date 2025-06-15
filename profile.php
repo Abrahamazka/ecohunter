@@ -4,8 +4,8 @@ if (empty($_SESSION['user'])) {
   header("location: login.php");
 }
 $pdo = require 'koneksi.php';
-if(isset($_POST['submit'])){
-  if(!empty($_FILES['profil']['tmp_name'])){
+if (isset($_POST['submit'])) {
+  if (!empty($_FILES['profil']['tmp_name'])) {
     $sql = 'UPDATE users SET nama=:nama, email=:email, alamat=:alamat, profil=:profil WHERE id=:id';
     $query = $pdo->prepare($sql);
     $query->execute(array(
@@ -133,8 +133,8 @@ if(isset($_POST['submit'])){
     }
 
     .edit-button,
-    .save-button,
-    .cancel-button {
+    .balik,
+    .keluar {
       width: 100%;
       padding: 10px;
       border: none;
@@ -142,6 +142,7 @@ if(isset($_POST['submit'])){
       cursor: pointer;
       font-size: 16px;
       transition: 0.2s ease;
+      text-align: center;
     }
 
     .edit-button {
@@ -154,15 +155,24 @@ if(isset($_POST['submit'])){
       background-color: #008b4f;
     }
 
-    .save-button {
-      background-color: #007bff;
-      color: white;
+    .luar {
+      display: flex;
+      gap: 0 10px;
       margin-top: 10px;
+      justify-content: center;
+      align-items: center;
     }
 
-    .cancel-button {
+    .balik {
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+    }
+
+    .keluar {
       background-color: #e74c3c;
       color: white;
+      text-decoration: none;
     }
 
     .edit-form {
@@ -195,26 +205,24 @@ if(isset($_POST['submit'])){
   <header>
     <div class="kepala">
       <div class="smeas">
-        <a href="#promo" style="text-decoration: none;">
+        <a href="homepage.php" style="text-decoration: none;">
           <span style="color: green;">Smea$</span><span style="color:darkblue">mart</span>
         </a>
       </div>
-      <div class="search">
-        <input type="text" placeholder="Cari di SmeasMart...">
-      </div>
+      
       <div class="gambar">
         <img src="keranjang.png" alt="keranjang" width="40px">
-        <img src="INIFURINA.jpg" alt="profil" width="40px" style="border-radius: 50%;">
+
       </div>
     </div>
     <hr>
   </header>
-<?php $pdo = require 'koneksi.php';
-$sql = 'SELECT * FROM users';
-$query = $pdo->prepare($sql);
-$query->execute();
-$data = $query->fetch();
-$base64 = base64_encode($data['profil']); ?>
+  <?php $pdo = require 'koneksi.php';
+  $sql = 'SELECT * FROM users';
+  $query = $pdo->prepare($sql);
+  $query->execute();
+  $data = $query->fetch();
+  $base64 = base64_encode($data['profil']); ?>
   <div class="container">
     <?php echo "<img src= 'data:image/*;base64, $base64' class='profile-pic' alt=''>" ?>
     <form action="" method="post" enctype="multipart/form-data">
@@ -230,6 +238,10 @@ $base64 = base64_encode($data['profil']); ?>
         <button class="edit-button" name="submit" type="submit">Edit Profil</button>
       </div>
     </form>
+    <div class="luar">
+      <a href="homepage.php" class="balik">Kembali</a>
+      <a class="keluar" href="logoutuser.php">Log Out</a>
+    </div>
   </div>
   </div>
 </body>
