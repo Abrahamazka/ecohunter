@@ -175,12 +175,7 @@ session_start();
     .menu {
       background-color: white;
       display: flex;
-      gap: 20px;
-      margin-bottom: 30px;
-      padding: 0 190px;
-      position: sticky;
-      top: 9%;
-      z-index: 1;
+      margin: 30px 50px;
     }
 
     .menu button {
@@ -190,37 +185,34 @@ session_start();
       padding: 8px 20px;
     }
 
-    .menu button.active {
-      border-bottom: 2px solid forestgreen;
-      color: forestgreen;
+    section {
+      display: flex;
+      flex-direction: column;
     }
 
     .etlse {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 0 180px;
-      overflow:;
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      margin-left: 30px;
+      row-gap: 21px;
     }
-    #Kategori1 {
-  display: flex;
-  overflow-x: auto;
-  padding: 0 180px;
-  gap: 20px;
-  scroll-behavior: smooth;
-}
-
-#Kategori1 .produk {
-  min-width: 200px;
-  flex-shrink: 0;
-}
-
+    .etlse2 {
+      margin-left: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 21px;
+    }
+    
+    
     .produk {
+      min-width: 220px;
       background: #fff;
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 10px;
       text-align: center;
+      margin: 0 30px;
     }
 
     .produk img {
@@ -280,24 +272,24 @@ session_start();
     .main-content {
       display: none;
     }
+
     .tomboool {
-   display: inline-block;
-   background-color:rgb(0, 153, 255);
-   color: white;
-   padding: 10px 20px;
-   margin-left: 10px;
-   border-radius: 8px;
-   gap: 20px;
-   text-decoration: none;
-   font-weight: bold;
-   transition: background-color 0.3s ease;
-   outline: none;
-   }
+      display: inline-block;
+      background-color: rgb(0, 153, 255);
+      color: white;
+      padding: 10px 20px;
+      margin-left: 10px;
+      border-radius: 8px;
+      gap: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      outline: none;
+    }
 
-.tomboool:hover {
-  background-color: #21669d;
-}
-
+    .tomboool:hover {
+      background-color: #21669d;
+    }
   </style>
 </head>
 
@@ -347,7 +339,7 @@ session_start();
 
     <section id="etalase">
       <div class="menu">
-        <button>Terlaris</button>
+        <h1>Terlaris</h1>
       </div>
       <?php
       $pdo = require 'koneksi.php';
@@ -356,77 +348,42 @@ session_start();
       $queryLaris = $pdo->prepare($sqlLaris);
       $queryLaris->execute();
 
-      while($dataLaris = $queryLaris->fetch()) {
-      $base64 = base64_encode($dataLaris['gambar_produk']); ?>
-
+      ?>
       <div id="Kategori1" class="etlse">
-        <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>
-        <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>       
-                <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>
-                <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>
-                <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>
-                <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>
-                <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-        </div>
-        
-      </div>
-        <?php }?>
+        <?php while ($dataLaris = $queryLaris->fetch()) {
+          $base64 = base64_encode($dataLaris['gambar_produk']); ?>
+          <div class="produk">
+            <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+            <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+            <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+            <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+          </div>
 
-       <div class="menu">
-         <button>Terbaru</button>
-       </div>
+
+        <?php } ?>
+      </div>
+
+      <div class="menu">
+        <h1>Terbaru</h1>
+      </div>
       <?php
       $pdo = require 'koneksi.php';
       $sqlBaru = 'SELECT * FROM products';
       $queryBaru = $pdo->prepare($sqlBaru);
-      $queryBaru->execute();
-      while($dataBaru = $queryBaru->fetch()) {
-      $base64 = base64_encode($dataBaru['gambar_produk']);
-      ?>
-      <div id="Kategori2" class="etlse">
-        <div class="produk">
-          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
-          <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
-          <div class="price">RP.<?php echo number_format($dataBaru['harga'], 2, ",", ".") ?></div>
-          <div><span><?php echo $dataBaru['terjual'] ?> Terjual</span></div>
-        </div>
+      $queryBaru->execute(); ?>
+      <div id="Kategori2" class="etlse2">
+        <?php while ($dataBaru = $queryBaru->fetch()) {
+          $base64 = base64_encode($dataBaru['gambar_produk']);
+        ?>
+          <div class="produk">
+            <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+            <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
+            <div class="price">RP.<?php echo number_format($dataBaru['harga'], 2, ",", ".") ?></div>
+            <div><span><?php echo $dataBaru['terjual'] ?> Terjual</span></div>
+          </div>
+        <?php } ?>
       </div>
     </section>
-        <?php } ?>
     <hr>
 
     <section id="support">
@@ -455,7 +412,6 @@ session_start();
       document.querySelector('.splash-screen').style.display = 'none';
       document.querySelector('.main-content').style.display = 'block';
     }, 4000);
-
   </script>
 </body>
 
