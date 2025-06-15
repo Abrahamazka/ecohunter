@@ -15,7 +15,7 @@ if(!empty($_POST)) {
         'deskripsi' => $_POST['deskripsi'],
         'id_seller' => $_SESSION['seller']['id']
     ));
-    header('location: homepagepenjual.php')
+    header('location: homepagepenjual.php');
 }
 ?>
 <!DOCTYPE html>
