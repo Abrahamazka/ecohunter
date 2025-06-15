@@ -43,28 +43,7 @@
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     }
     body {
-        background-color:rgba(237, 237, 224, 0.255)
-    }
-    .smeas {
-        font-size: 30px;
-        margin-left: 20px;
-        cursor: pointer;
-    }
-    .search {
-        height: 40px;
-        width: 1000px;
-        border-radius: 50px;
-        border: 1px solid;
-    }
-    .search input {
-        background: none;
-        border:none ;
-    }
-    .gambar {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        padding-right: 10px;
+        background-color:rgb(255, 255, 255)
     }
 
 
@@ -93,6 +72,7 @@
 
 .item-wo {
   display: flex;
+  gap: 15px;
   align-items: center;
   margin-top: 20px;
   border-bottom: 1px solid #ddd;
@@ -137,7 +117,7 @@
 }
 
 .buy-btn {
-  background-color: #00aa5b;
+  background-color:rgb(29, 205, 229);
   color: white;
   padding: 10px;
   border: none;
@@ -146,28 +126,19 @@
   border-radius: 6px;
   cursor: pointer;
 }
-.all {
-  margin-top: 25px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-}
-.all input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #00aa5b;
-  cursor: pointer;
-}
-.all label:hover {
-  text-decoration: underline;
-  cursor: pointer;
+    .smeas {
+      font-size: 30px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .smeas a {
+      text-decoration: none;
+    }
+    h2 {
+  margin-bottom: 0px;
+  padding: 20px 20px ;
+  margin-left: 40px;
 }
 
 </style>
@@ -179,55 +150,23 @@
             <span style="color: green;">Smea$</span><span style="color:darkblue">mart</span>
             </a>
             </div>
-            <div class="search">
-            <input type="text" placeholder="Cari di SmeasMart..." style="font-size: 17px ; margin-left: 20px; margin-top: 9px;">
-            </div>
-            <div class="gambar">
-            <img src="keranjang.png" alt="keranjang" width="40px" style="border:0px solid; border-radius: 0%;">   
-            <img src="INIFURINA.jpg" alt="profil" width="40px" style="border:0px solid; border-radius: 50%;">   
-            </div>
         </div>
         <div>
         <hr>
         </div>
  </header>
-   
-<div class="container">
-    <div class="left">
-      <h2>Keranjang</h2>
-      
-      <div class="all">
-        <input type="checkbox" id="select-all" style="margin-right=10px;">
-        <label for="select-all">Pilih semua</label>
-      </div>
-
-
-      <div class="item-wo">
-        <input type="checkbox" class="csscek">
-        <img src="etal1.png">
-        <div class="item">
-          <h4>Adis</h4>
-          <p class="desk">Free Install | Garansi 1 Tahun</p>
-          <p class="price">Rp9.155.000</p>
+ 
+  <h2>Keranjang</h2>
+  <div class="container">
+      <div class="left">
+        <div class="item-wo">
+          <img src="etal1.png">
+          <div class="item">
+            <h4>Adis</h4>
+            <p class="desk">Free Install | Garansi 1 Tahun</p>
+            <p class="price">Rp9.155.000</p>
+          </div>
         </div>
-        <div class="item-actions">
-          <input type="number" value="1" min="1">        
-        </div>
-      </div>
-      <div class="item-wo">
-        <input type="checkbox" class="csscek">
-        <img src="etal1.png">
-        <div class="item">
-          <h4>Adis</h4>
-          <p class="desk">Free Install | Garansi 1 Tahun</p>
-          <p class="price">Rp9.155.000</p>
-        </div>
-        <div class="item-actions">
-          <input type="number" value="1" min="1">        
-        </div>
-      </div>   
-
-
     </div>
      
 
@@ -241,19 +180,4 @@
 
 
 </body>
-<script>
-  const selectAll = document.getElementById('select-all');
-  const itemCheckboxes = document.querySelectorAll('.csscek');
-
-  selectAll.addEventListener('change', function () {
-    itemCheckboxes.forEach(cb => cb.checked = selectAll.checked);
-  });
-  
-  itemCheckboxes.forEach(cb => {
-    cb.addEventListener('change', function () {
-      const allChecked = [...itemCheckboxes].every(cb => cb.checked);
-      selectAll.checked = allChecked;
-    });
-  });
-</script>
 </html>

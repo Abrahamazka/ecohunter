@@ -200,7 +200,20 @@ session_start();
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 20px;
       padding: 0 180px;
+      overflow:;
     }
+    #Kategori1 {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 180px;
+  gap: 20px;
+  scroll-behavior: smooth;
+}
+
+#Kategori1 .produk {
+  min-width: 200px;
+  flex-shrink: 0;
+}
 
     .produk {
       background: #fff;
@@ -267,6 +280,24 @@ session_start();
     .main-content {
       display: none;
     }
+    .tomboool {
+   display: inline-block;
+   background-color:rgb(0, 153, 255);
+   color: white;
+   padding: 10px 20px;
+   margin-left: 10px;
+   border-radius: 8px;
+   gap: 20px;
+   text-decoration: none;
+   font-weight: bold;
+   transition: background-color 0.3s ease;
+   outline: none;
+   }
+
+.tomboool:hover {
+  background-color: #21669d;
+}
+
   </style>
 </head>
 
@@ -305,21 +336,18 @@ session_start();
             $base64 = base64_encode($data['profil']);
             echo "<img src= 'data:image/*;base64, $base64' alt='profil' width='40px' style='border-radius: 50%;''>";
           } else { ?>
-            <button><a href="register.php">Register</a></button>
-            <button><a href="login.php">Login</a></button>
+            <a href="register.php" class="tomboool">Register</a>
+            <a href="login.php" class="tomboool">Login</a>
           <?php } ?>
         </div>
       </div>
       <hr>
     </header>
 
-    <section id="promo">
-      <div class="difka"></div>
-    </section>
+
     <section id="etalase">
       <div class="menu">
-        <button class="active" onclick="showCategory('Kategori1')">Terlaris</button>
-        <button onclick="showCategory('Kategori2')">Terbaru</button>
+        <button>Terlaris</button>
       </div>
       <?php
       $pdo = require 'koneksi.php';
@@ -338,9 +366,49 @@ session_start();
           <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
           <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
         </div>
+        <div class="produk">
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+        </div>       
+                <div class="produk">
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+        </div>
+                <div class="produk">
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+        </div>
+                <div class="produk">
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+        </div>
+                <div class="produk">
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+        </div>
+                <div class="produk">
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+        </div>
+        
       </div>
         <?php }?>
 
+       <div class="menu">
+         <button>Terbaru</button>
+       </div>
       <?php
       $pdo = require 'koneksi.php';
       $sqlBaru = 'SELECT * FROM products';
@@ -349,7 +417,7 @@ session_start();
       while($dataBaru = $queryBaru->fetch()) {
       $base64 = base64_encode($dataBaru['gambar_produk']);
       ?>
-      <div id="Kategori2" class="etlse hidden">
+      <div id="Kategori2" class="etlse">
         <div class="produk">
           <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
           <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
@@ -388,12 +456,6 @@ session_start();
       document.querySelector('.main-content').style.display = 'block';
     }, 4000);
 
-    function showCategory(categoryId) {
-      document.querySelectorAll('.etlse').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(categoryId).classList.remove('hidden');
-      event.target.classList.add('active');
-    }
   </script>
 </body>
 
