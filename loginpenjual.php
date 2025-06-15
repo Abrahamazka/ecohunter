@@ -4,26 +4,23 @@ $hasil = true;
 $error = '';
 if (!empty($_POST)) {
     $pdo = require 'koneksi.php';
-    $sql = "select * from users where email = :email";
+    $sql = "select * from sellers";
     $query = $pdo->prepare($sql);
-    $query->execute(array('email' => $_POST['email']));
-    $user = $query->fetch();
-    if (!$user) {
+    $query->execute();
+    $seller = $query->fetch();
+    if (!$seller) {
         $hasil = false;
-    } elseif(sha1($_POST['password']) != $user['password']) {
+    } elseif ($_POST['no_telp'] != $seller['no_telp']) {
         $hasil = false;
-        $error = "Email atau password tidak ada";
-    }else if($_POST['email'] != $user['email']){
-        $hasil = false;
-        $error = "Email atau password tidak ada";
+        $error = "nomor telepon tidak terdaftar";
     } else {
         $hasil = true;
-        $_SESSION['seller']= array(
+        $_SESSION['seller'] = array(
             'id' => $seller['id'],
-            'toko' => $seller['toko'],
+            'no_telp' => $seller['no_telp'],
 
         );
-        header("Location: homepage.php");
+        header("Location: homepagepenjual.php");
     }
 }
 ?>
@@ -72,8 +69,8 @@ if (!empty($_POST)) {
         margin-bottom: 20px;
     }
 
-    .kolom input[type="email"],
-    button{
+    .kolom input[type="text"],
+    button {
         color: white;
         width: 100%;
         padding: 12px 10px;
@@ -85,7 +82,7 @@ if (!empty($_POST)) {
         background: transparent;
     }
 
-    .kolom input[type="password"] {
+    .kolom input[type="text"] {
         color: white;
         width: 100%;
         padding: 12px 10px;
@@ -139,7 +136,8 @@ if (!empty($_POST)) {
         color: #91eef6;
         text-decoration: none;
     }
-    .error{
+
+    .error {
         color: red;
     }
 </style>
@@ -148,22 +146,18 @@ if (!empty($_POST)) {
     <form action="" method="post">
         <div class="kepala">
             <h2>Login Penjual</h2>
-            <?php if($hasil == false) { ?>
-                <p class="error">Email atau password salah</p>
+            <?php if ($hasil == false) { ?>
+                <p class="error">no telepon tidak terdaftar</p>
             <?php } ?>
             <div class="kolom">
-                <input type="email" name="email" required />
-                <span>email</span>
-            </div>
-            <div class="kolom">
-                <input type="password" name="password" required />
-                <span>password</span>
+                <input type="text" name="no_telp" required />
+                <span>No. Telp</span>
             </div>
             <div class="kolom">
                 <button type="submit">Masuk</button>
             </div>
-        
-    </div>
+
+        </div>
 </body>
 
 </html>

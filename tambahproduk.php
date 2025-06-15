@@ -1,15 +1,21 @@
 <?php
+session_start();
+if(empty($_SESSION['seller'])) {
+    header('location: loginpenjual.php');
+}
 if(!empty($_POST)) {
     $pdo = require 'koneksi.php';
-    $sql = 'INSERT INTO products (nama_produk, gambar_produk, harga, stok, deskripsi) VALUES (:nama, :gambar, :harga, :stok, :deskripsi)';
+    $sql = 'INSERT INTO products (nama_produk, gambar_produk, harga, stok, deskripsi, id_seller) VALUES (:nama, :gambar, :harga, :stok, :deskripsi, :id_seller)';
     $query = $pdo->prepare($sql);
     $query->execute(array(
         'nama' => $_POST['namaproduk'],
         'gambar' => file_get_contents($_FILES['gambarproduk']['tmp_name']),
         'harga' => $_POST['hargaproduk'],
         'stok' => $_POST['stok'],
-        'deskripsi' => $_POST['deskripsi']
+        'deskripsi' => $_POST['deskripsi'],
+        'id_seller' => $_SESSION['seller']['id']
     ));
+    header('location: homepagepenjual.php')
 }
 ?>
 <!DOCTYPE html>
