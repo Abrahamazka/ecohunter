@@ -1,8 +1,10 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,10 +15,13 @@ session_start();
       padding: 0;
       box-sizing: border-box;
     }
-    html, body {
+
+    html,
+    body {
       height: 100%;
       font-family: Arial, sans-serif;
     }
+
     .splash-screen {
       position: fixed;
       width: 100%;
@@ -29,74 +34,80 @@ session_start();
       flex-direction: column;
       color: white;
     }
+
     .circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.4);
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    box-shadow:
-      0 0 20px rgba(237, 0, 0, 0.7),
-      inset 0 0 15px rgba(255, 0, 0, 0.9);
-    animation: circleExpand 1.2s ease forwards;
-    animation-delay: 0.2s;
-  }
-  .logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120px;
-    height: 120px;
-    transform: translate(-50%, -50%) scale(0);
-    animation: logoScaleIn 1s ease forwards;
-    animation-delay: 1.5s;
-  }
-
-  .logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-
-  .app-name {
-    position: absolute;
-    bottom: -50px;
-    width: 100%;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 0.1em;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUpIn 1s ease forwards;
-    animation-delay: 2.9s;
-  }
-     @keyframes circleExpand {
-    to {
-      transform: translate(-50%, -50%) scale(1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.4);
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
       box-shadow:
-        0 0 40px rgba(255, 255, 255, 0.9),
-        inset 0 0 30px rgb(255, 255, 255);
+        0 0 20px rgba(237, 0, 0, 0.7),
+        inset 0 0 15px rgba(255, 0, 0, 0.9);
+      animation: circleExpand 1.2s ease forwards;
+      animation-delay: 0.2s;
     }
-  }
-  @keyframes logoScaleIn {
-    to {
-      transform: translate(-50%, -50%) scale(1);
+
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      transform: translate(-50%, -50%) scale(0);
+      animation: logoScaleIn 1s ease forwards;
+      animation-delay: 1.5s;
     }
-  }
-  @keyframes fadeUpIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
-  }
-/*PEMBATAS OI*/
+
+
+    .app-name {
+      position: absolute;
+      bottom: -50px;
+      width: 100%;
+      text-align: center;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUpIn 1s ease forwards;
+      animation-delay: 2.9s;
+    }
+
+    @keyframes circleExpand {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow:
+          0 0 40px rgba(255, 255, 255, 0.9),
+          inset 0 0 30px rgb(255, 255, 255);
+      }
+    }
+
+    @keyframes logoScaleIn {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes fadeUpIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*PEMBATAS OI*/
 
     body {
       background-color: rgb(255, 255, 255);
@@ -121,30 +132,31 @@ session_start();
       margin-left: 20px;
       cursor: pointer;
     }
+
     .smeas a {
       text-decoration: none;
     }
 
-.search {
-   height: 40px;
-   width: 1000px;
-  border-radius: 50px;
-  border: 1px solid #ccc;
-  background-color: #f2f2f2;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  padding: 0px 20px;
-  overflow: hidden;
-}
+    .search {
+      height: 40px;
+      width: 1000px;
+      border-radius: 50px;
+      border: 1px solid #ccc;
+      background-color: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0px 20px;
+      overflow: hidden;
+    }
 
-.search input {
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 20px;
-  flex: 1;
-}
+    .search input {
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 20px;
+      flex: 1;
+    }
 
     .gambar {
       display: flex;
@@ -257,8 +269,9 @@ session_start();
     }
   </style>
 </head>
+
 <body>
-    
+
   <div class="splash-screen">
     <div class="app-container" aria-label="App opening animation">
       <div class="circle"></div>
@@ -282,7 +295,19 @@ session_start();
         </div>
         <div class="gambar">
           <img src="keranjang.png" alt="keranjang" width="40px">
-          <img src="INIFURINA.jpg" alt="profil" width="40px" style="border-radius: 50%;">
+          <?php
+          if (isset($_SESSION['user'])) {
+            $pdo = require 'koneksi.php';
+            $sql = 'SELECT profil FROM users WHERE id=:id';
+            $query = $pdo->prepare($sql);
+            $query->execute(['id' => $_SESSION['user']['id']]);
+            $data = $query->fetch();
+            $base64 = base64_encode($data['profil']);
+            echo "<img src= 'data:image/*;base64, $base64' alt='profil' width='40px' style='border-radius: 50%;''>";
+          } else { ?>
+            <button><a href="register.php">Register</a></button>
+            <button><a href="login.php">Login</a></button>
+          <?php } ?>
         </div>
       </div>
       <hr>
@@ -291,30 +316,49 @@ session_start();
     <section id="promo">
       <div class="difka"></div>
     </section>
-
     <section id="etalase">
       <div class="menu">
-        <button class="active" onclick="showCategory('Kategori1')">Kategori1</button>
-        <button onclick="showCategory('Kategori2')">Kategori2</button>
+        <button class="active" onclick="showCategory('Kategori1')">Terlaris</button>
+        <button onclick="showCategory('Kategori2')">Terbaru</button>
       </div>
+      <?php
+      $pdo = require 'koneksi.php';
+      $sqlLaris = 'SELECT * FROM products
+      ORDER BY terjual DESC';
+      $queryLaris = $pdo->prepare($sqlLaris);
+      $queryLaris->execute();
+
+      while($dataLaris = $queryLaris->fetch()) {
+      $base64 = base64_encode($dataLaris['gambar_produk']); ?>
 
       <div id="Kategori1" class="etlse">
         <div class="produk">
-          <img src="etal1.png">
-          <div class="title">Adis</div>
-          <div class="price">Rp3.999.000</div>
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
         </div>
       </div>
+        <?php }?>
 
+      <?php
+      $pdo = require 'koneksi.php';
+      $sqlBaru = 'SELECT * FROM products';
+      $queryBaru = $pdo->prepare($sqlBaru);
+      $queryBaru->execute();
+      while($dataBaru = $queryBaru->fetch()) {
+      $base64 = base64_encode($dataBaru['gambar_produk']);
+      ?>
       <div id="Kategori2" class="etlse hidden">
         <div class="produk">
-          <img src="etal3.jpg">
-          <div class="title">Siapa ini jir</div>
-          <div class="price">Rp3.999.000</div>
+          <?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?>
+          <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
+          <div class="price">RP.<?php echo number_format($dataBaru['harga'], 2, ",", ".") ?></div>
+          <div><span><?php echo $dataBaru['terjual'] ?> Terjual</span></div>
         </div>
       </div>
     </section>
-
+        <?php } ?>
     <hr>
 
     <section id="support">
@@ -352,4 +396,5 @@ session_start();
     }
   </script>
 </body>
+
 </html>
