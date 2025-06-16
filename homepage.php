@@ -2,7 +2,9 @@
 session_start();
 if (!isset($_SESSION['keranjang'])) {
   $_SESSION['keranjang'] = [];
-} ?>
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,15 +161,18 @@ if (!isset($_SESSION['keranjang'])) {
       font-size: 20px;
       flex: 1;
     }
-    .form{
+
+    .form {
       display: flex;
     }
-    .cari{
+
+    .cari {
       font-size: 30px;
       border: none;
       background-color: white;
-      
+
     }
+
     .gambar {
       display: flex;
       align-items: center;
@@ -194,6 +199,7 @@ if (!isset($_SESSION['keranjang'])) {
       cursor: pointer;
       padding: 8px 20px;
     }
+
 
     section {
       display: flex;
@@ -281,9 +287,7 @@ if (!isset($_SESSION['keranjang'])) {
       border: 0.5px solid rgba(0, 0, 0, 0.1);
     }
 
-    .main-content {
-      display: none;
-    }
+    
 
     .tomboool {
       display: inline-block;
@@ -306,27 +310,36 @@ if (!isset($_SESSION['keranjang'])) {
 </head>
 
 <body>
-
-  <div class="splash-screen">
-    <div class="app-container" aria-label="App opening animation">
-      <div class="circle"></div>
-      <div class="logo" role="img">
-        <img src="keranj.jpg" alt="Logo" />
+  <?php
+  if (!isset($_SESSION['intro'])) {
+    $_SESSION['intro'] = true;
+    $intro = true;
+  } else {
+    $intro = false;
+  }
+  ?>
+  <?php if ($intro) : ?>
+    <div class="splash-screen">
+      <div class="app-container" aria-label="App opening animation">
+        <div class="circle"></div>
+        <div class="logo" role="img">
+          <img src="keranj.jpg" alt="Logo" />
+        </div>
+        <div class="app-name">Smeasmart</div>
       </div>
-      <div class="app-name">Smeasmart</div>
     </div>
-  </div>
-
+  <?php endif;
+  ?>
   <div class="main-content">
     <header>
       <div class="kepala">
         <div class="smeas">
-          <a href="#promo">
+          <a href="">
             <span style="color: green;">Smea$</span><span style="color:darkblue">mart</span>
           </a>
         </div>
         <!-- cari berdasarkan nama prdukkkkk -->
-        <form class="form" action="search.php" method="post">
+        <form class="form" action="" method="post">
           <div class="search">
             <input type="text" name="cari" placeholder="Cari di SmeasMart...">
           </div>
@@ -351,59 +364,84 @@ if (!isset($_SESSION['keranjang'])) {
       </div>
       <hr>
     </header>
-
-
-    <section id="etalase">
-      <div class="menu">
-        <h1>Terlaris</h1>
-      </div>
-      <?php
-      $pdo = require 'koneksi.php';
-      $sqlLaris = 'SELECT * FROM products
-      ORDER BY terjual DESC';
-      $queryLaris = $pdo->prepare($sqlLaris);
-      $queryLaris->execute();
-
-      ?>
-      <div id="Kategori1" class="etlse">
-        <?php while ($dataLaris = $queryLaris->fetch()) {
-          $base64 = base64_encode($dataLaris['gambar_produk']); ?>
-
-          <div class="produk">
-            <a href="etal.php?id=<?php echo $dataLaris['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
-            <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
-            <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
-            <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
-          </div>
-
-
-
-        <?php } ?>
-      </div>
-
-      <div class="menu">
-        <h1>Terbaru</h1>
-      </div>
-      <?php
-      $pdo = require 'koneksi.php';
-      $sqlBaru = 'SELECT * FROM products';
-      $queryBaru = $pdo->prepare($sqlBaru);
-      $queryBaru->execute(); ?>
-      <div id="Kategori2" class="etlse2">
-        <?php while ($dataBaru = $queryBaru->fetch()) {
-          $base64 = base64_encode($dataBaru['gambar_produk']);
+    <?php if (!empty($_POST['cari'])) { ?>
+      <section>
+        <div class="menu">
+          <h1>Pencarian</h1>
+        </div>
+        <?php
+        $pdo = require 'koneksi.php';
+        $sqlCari = 'SELECT * FROM products
+        WHERE nama_produk LIKE :nama';
+        $queryCari = $pdo->prepare($sqlCari);
+        $queryCari->execute(['nama' => '%' . $_POST['cari'] . '%' ]);
         ?>
+        <div id="Kategori1" class="etlse2">
+          <?php while ($dataCari = $queryCari->fetch()) {
+            $base64 = base64_encode($dataCari['gambar_produk']); ?>
 
-          <div class="produk">
-            <a href="etal.php?id=<?php echo $dataBaru['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
-            <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
-            <div class="price">RP.<?php echo number_format($dataBaru['harga'], 2, ",", ".") ?></div>
-            <div><span><?php echo $dataBaru['terjual'] ?> Terjual</span></div>
-          </div>
+            <div class="produk">
+              <a href="etal.php?id=<?php echo $dataCari['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
+              <div class="title"><?php echo $dataCari['nama_produk'] ?></div>
+              <div class="price">RP.<?php echo number_format($dataCari['harga'], 2, ",", ".") ?></div>
+              <div><span><?php echo $dataCari['terjual'] ?> Terjual</span></div>
+            </div>
 
-        <?php } ?>
-      </div>
-    </section>
+
+
+          <?php } ?>
+        </div>
+      </section>
+    <?php } else { ?>
+      <section id="etalase">
+        <div class="menu">
+          <h1>Terlaris</h1>
+        </div>
+        <?php
+        $pdo = require 'koneksi.php';
+        $sqlLaris = 'SELECT * FROM products
+          ORDER BY terjual DESC';
+        $queryLaris = $pdo->prepare($sqlLaris);
+        $queryLaris->execute();
+        $sqlBaru = 'SELECT * FROM products';
+        $queryBaru = $pdo->prepare($sqlBaru);
+        $queryBaru->execute();
+        ?>
+        <div id="Kategori1" class="etlse">
+          <?php while ($dataLaris = $queryLaris->fetch()) {
+            $base64 = base64_encode($dataLaris['gambar_produk']); ?>
+
+            <div class="produk">
+              <a href="etal.php?id=<?php echo $dataLaris['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
+              <div class="title"><?php echo $dataLaris['nama_produk'] ?></div>
+              <div class="price">RP.<?php echo number_format($dataLaris['harga'], 2, ",", ".") ?></div>
+              <div><span><?php echo $dataLaris['terjual'] ?> Terjual</span></div>
+            </div>
+
+
+
+          <?php } ?>
+        </div>
+
+        <div class="menu">
+          <h1>Terbaru</h1>
+        </div>
+        <div id="Kategori2" class="etlse2">
+          <?php while ($dataBaru = $queryBaru->fetch()) {
+            $base64 = base64_encode($dataBaru['gambar_produk']);
+          ?>
+
+            <div class="produk">
+              <a href="etal.php?id=<?php echo $dataBaru['id'] ?>"><?php echo "<img src= 'data:image/*;base64, $base64'  alt=''>" ?></a>
+              <div class="title"><?php echo $dataBaru['nama_produk'] ?></div>
+              <div class="price">RP.<?php echo number_format($dataBaru['harga'], 2, ",", ".") ?></div>
+              <div><span><?php echo $dataBaru['terjual'] ?> Terjual</span></div>
+            </div>
+
+          <?php } ?>
+        </div>
+      </section>
+    <?php } ?>
     <hr>
 
     <section id="support">
@@ -433,6 +471,12 @@ if (!isset($_SESSION['keranjang'])) {
       document.querySelector('.main-content').style.display = 'block';
     }, 4000);
   </script>
+  <?php if (!$intro || (!empty($_POST['cari']) || empty($_POST['cari']))) : ?>
+    <script>
+      document.querySelector('.main-content').style.display = 'block';
+    </script>
+  <?php endif; ?>
+
 </body>
 
 </html>
