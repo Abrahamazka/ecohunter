@@ -3,7 +3,9 @@ session_start();
 if (!isset($_SESSION['keranjang'])) {
   $_SESSION['keranjang'] = [];
 }
-
+if (!empty($_SESSION['keranjang'])) {
+  $count = count($_SESSION['keranjang']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -287,7 +289,7 @@ if (!isset($_SESSION['keranjang'])) {
       border: 0.5px solid rgba(0, 0, 0, 0.1);
     }
 
-    
+
 
     .tomboool {
       display: inline-block;
@@ -305,6 +307,11 @@ if (!isset($_SESSION['keranjang'])) {
 
     .tomboool:hover {
       background-color: #21669d;
+    }
+    .krnjg{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
   </style>
 </head>
@@ -346,7 +353,14 @@ if (!isset($_SESSION['keranjang'])) {
           <button type="submit" class="cari" name="go">&#128269;</button>
         </form>
         <div class="gambar">
-          <a href="keranjang.php"><img src="keranjang.png" alt="keranjang" width="40px"></a>
+          <div class="krnjg">
+            <a href="keranjang.php"><img src="keranjang.png" alt="keranjang" width="40px"></a>
+            <?php
+            if (!empty($_SESSION['keranjang'])) {
+              echo '(' . $count . ')';
+            }
+            ?>
+          </div>
           <?php
           if (isset($_SESSION['user'])) {
             $pdo = require 'koneksi.php';
@@ -374,7 +388,7 @@ if (!isset($_SESSION['keranjang'])) {
         $sqlCari = 'SELECT * FROM products
         WHERE nama_produk LIKE :nama';
         $queryCari = $pdo->prepare($sqlCari);
-        $queryCari->execute(['nama' => '%' . $_POST['cari'] . '%' ]);
+        $queryCari->execute(['nama' => '%' . $_POST['cari'] . '%']);
         ?>
         <div id="Kategori1" class="etlse2">
           <?php while ($dataCari = $queryCari->fetch()) {
